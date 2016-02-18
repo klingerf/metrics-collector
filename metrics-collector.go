@@ -22,7 +22,7 @@ func main() {
 		"http://127.0.0.1:9990/admin/metrics.json",
 		"Address of TwitterServer metrics to collect")
 	publisherStr := flag.String("publisher", "",
-		"Stats publisher; supported publisher: datadog, debug")
+		"Stats publisher; supported publishers: datadog, debug")
 	trimmed := flag.Bool("trimmed", false,
 		"Reduce metrics before sending them to the publisher")
 	namespace := flag.String("namespace", "",

@@ -37,7 +37,7 @@ Usage: metrics-collector [flags]
   -period duration
       Polling period (default 1m0s)
   -publisher string
-      Stats publisher; supported publisher: datadog, debug
+      Stats publisher; supported publishers: datadog, debug
   -service string
       Logical name for service that is being collected
   -source string

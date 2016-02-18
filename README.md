@@ -41,7 +41,7 @@ Usage: metrics-collector [flags]
   -service string
       Logical name for service that is being collected
   -source string
-      Common name for entity that is being collected (default "kl-buoyant")
+      Common name for entity that is being collected (default os.Hostname())
   -trimmed
       Reduce metrics before sending them to the publisher
 exit status 2

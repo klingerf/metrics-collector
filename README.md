@@ -60,9 +60,13 @@ $ docker run --rm metrics-collector -publisher debug
 ...
 ```
 
+You can also pull a pre-built Docker image from:
+
+https://hub.docker.com/r/klingerf/metrics-collector/
+
 ## Kubernetes
 
-The metrics-collector Docker image built above makes for a great sidecar process
+The metrics-collector Docker image from above makes for a great sidecar process
 when running linkerd in [Kubernetes](https://github.com/kubernetes/kubernetes).
 
 Here's a sample replication controller that shows how to run them together:

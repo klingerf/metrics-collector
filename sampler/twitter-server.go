@@ -10,6 +10,7 @@ import (
 
 type TwitterServerSampler struct {
 	MetricsURL string
+	matcher    *regexp.Regexp
 }
 
 var (
@@ -18,8 +19,13 @@ var (
 	jvmStat   = regexp.MustCompile(`^jvm/uptime$`) // just uptime, for now
 )
 
-func NewTwitterServerSampler(metricsURL string) *TwitterServerSampler {
-	return &TwitterServerSampler{metricsURL}
+func NewTwitterServerSampler(metricsURL, matchRegexp string) *TwitterServerSampler {
+	var matcher *regexp.Regexp
+	if len(matchRegexp) > 0 {
+		matcher = regexp.MustCompile(matchRegexp)
+	}
+
+	return &TwitterServerSampler{metricsURL, matcher}
 }
 
 func (sampler TwitterServerSampler) Sample() (*Sample, error) {
@@ -50,7 +56,7 @@ func (sampler TwitterServerSampler) Sample() (*Sample, error) {
 func (sampler TwitterServerSampler) Trim(sample *Sample) {
 	trimmed := make(Metrics)
 	for k, v := range sample.Metrics {
-		if rtRequest.MatchString(k) || rtLatency.MatchString(k) || jvmStat.MatchString(k) {
+		if rtRequest.MatchString(k) || rtLatency.MatchString(k) || jvmStat.MatchString(k) || (sampler.matcher != nil && sampler.matcher.MatchString(k)) {
 			trimmed[k] = v
 		}
 	}

@@ -35,6 +35,8 @@ func main() {
 		"Polling period")
 	datadogStatsd := flag.String("datadog-statsd", "127.0.0.1:8125",
 		"Address of StatsD process used by the datadog publisher")
+	matchRegexp := flag.String("match", "",
+		"Regular expression for recording additional metrics.")
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [flags]\n", path.Base(os.Args[0]))
@@ -62,7 +64,7 @@ func main() {
 	signal.Notify(exitChan, os.Interrupt, os.Kill)
 
 	t := time.NewTicker(*period)
-	s := sampler.NewTwitterServerSampler(*metricsURL)
+	s := sampler.NewTwitterServerSampler(*metricsURL, *matchRegexp)
 
 	for {
 		select {

@@ -32,6 +32,8 @@ $ go run metrics-collector.go -help
 Usage: metrics-collector [flags]
   -datadog-statsd string
       Address of StatsD process used by the datadog publisher (default "127.0.0.1:8125")
+  -match string
+      Regular expression for recording additional metrics.
   -metrics-url string
       Address of TwitterServer metrics to collect (default "http://127.0.0.1:9990/admin/metrics.json")
   -namespace string
@@ -51,13 +53,18 @@ exit status 2
 
 ## Docker
 
-Use the included Dockerfile to build a metrics-collector Docker image, like so:
+Use the included `dockerize` script to build a metrics-collector Docker image:
 
 ```bash
-$ docker build -t metrics-collector .
+$ ./dockerize
 ...
-$ docker run --rm metrics-collector -publisher debug
-...
+Created klingerf/metrics-collector:latest
+```
+
+Run it locally with:
+
+```bash
+$ docker run --rm klingerf/metrics-collector:latest -publisher debug
 ```
 
 You can also pull a pre-built Docker image from:

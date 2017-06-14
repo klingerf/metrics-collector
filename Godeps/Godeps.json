@@ -1,0 +1,14 @@
+{
+	"ImportPath": "github.com/klingerf/metrics-collector",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/DataDog/datadog-go/statsd",
+			"Rev": "bc97e0770ad4edae1c9dc14beb40b79b2dde32f8"
+		}
+	]
+}

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+docker run --rm -v `pwd`:/go/src/github.com/klingerf/metrics-collector -w /go/src/github.com/klingerf/metrics-collector -e CGO_ENABLED=0 golang:1.8 go build -v
+docker build -t klingerf/metrics-collector:latest .
+echo "Created klingerf/metrics-collector:latest"
